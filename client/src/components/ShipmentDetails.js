@@ -118,7 +118,7 @@ class ShipmentDetails extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-  return { res: state.fetchShipmentReducer };
+  return { res: state.fetchShipmentReducer[0] };
 };
 
 export default connect(mapStateToProps, { fetchShipment })(ShipmentDetails);

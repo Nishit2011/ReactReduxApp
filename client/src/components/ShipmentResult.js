@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import "../styles/shipment-result-style.css";
-import { fetchShipments } from "../action/index";
+import { fetchShipments, fetchShipment } from "../action/index";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Pagination from "./Pagination";
+import Search from "./Search";
 
 class ShipmentResults extends Component {
   state = {
@@ -11,11 +12,22 @@ class ShipmentResults extends Component {
     page: 1,
     totalElems: 0,
     currentPage: 1,
-    searchResult: []
+    searchResults: [],
+    flag: true
   };
   componentDidMount() {
     this.props.fetchShipments(20, this.state.page);
   }
+  getSearchResultById = id => {
+    debugger;
+    if (id) {
+      this.setState({ flag: false }, () => this.props.fetchShipment(id));
+    } else {
+      this.setState({ flag: true }, () => () =>
+        this.props.fetchShipments(20, this.state.page)
+      );
+    }
+  };
 
   getPageNumber = (page, totalPage) => {
     console.log("page:-", this.state.totalPage);
@@ -25,7 +37,9 @@ class ShipmentResults extends Component {
     );
   };
 
-  getSearchResultById(val) {}
+  setTextField(e) {
+    console.log(e.target.value);
+  }
 
   sortTable(columnIndex) {
     let shouldSwitch;
@@ -67,15 +81,27 @@ class ShipmentResults extends Component {
   }
 
   renderShipmentResultTable() {
-    //console.log(this.props.res);
     //this.props.getAllResults(this.props.res);
 
-    return this.props.res.map((row, index) => {
+    const data = this.state.flag ? this.props.res : this.props.resBasedOnId;
+
+    return data.map((row, index) => {
+      const names = [];
+      names[index] = row.name;
+      localStorage.setItem("names", JSON.stringify(names));
+
       return (
         <tr key={index} className='shipment-result-tbl-row'>
           <td>{index + 1}</td>
           <td className='shipment-result-tbl-id'>{row.id}</td>
-          <td className='shipment-result-tbl-name'>{row.name}</td>
+          <td
+            className='shipment-result-tbl-name'
+            contentEditable='true'
+            suppressContentEditableWarning={true}
+            onBlur={e => this.setTextField(e)}
+          >
+            {JSON.parse(localStorage.getItem("names"))}
+          </td>
           <td>{row.status}</td>
           <td>
             <Link to={`/details/${row.id}`} id={row.id}>
@@ -89,6 +115,7 @@ class ShipmentResults extends Component {
   render() {
     return (
       <div>
+        <Search getSearchResultById={val => this.getSearchResultById(val)} />
         <table id='resultTbl' className='shipment-result-tbl'>
           <thead>
             <tr>
@@ -118,6 +145,11 @@ class ShipmentResults extends Component {
   }
 }
 const mapStateToProps = (state, props) => {
-  return { res: state.fetchShipmentsReducer };
+  return {
+    res: state.fetchShipmentsReducer,
+    resBasedOnId: state.fetchShipmentReducer
+  };
 };
-export default connect(mapStateToProps, { fetchShipments })(ShipmentResults);
+export default connect(mapStateToProps, { fetchShipments, fetchShipment })(
+  ShipmentResults
+);

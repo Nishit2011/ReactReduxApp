@@ -18,7 +18,6 @@ class Home extends Component {
   render() {
     return (
       <div className='home-container'>
-        <Search searchResults={this.searchResults} />
         <ShipmentResult handleSearchResult={this.state.searchResults} />
       </div>
     );

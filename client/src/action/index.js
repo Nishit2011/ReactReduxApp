@@ -17,8 +17,10 @@ export const fetchShipments = (limit, page) => async dispatch => {
 
 export const fetchShipment = id => async dispatch => {
   const response = await baseURL.get(`/shipments/${id}`);
+  let arr = [];
+  arr.push(response.data);
   dispatch({
     type: FETCH_SHIPMENT,
-    payload: response.data
+    payload: arr
   });
 };

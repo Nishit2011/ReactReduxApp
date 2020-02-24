@@ -5,15 +5,13 @@ import { fetchShipment } from "../action/index";
 
 class Search extends Component {
   state = {
-    searchVal: ""
+    searchVal: null
   };
 
-  searchFn = val => {
-    const result = this.props.fetchShipment(this.state.searchVal);
-    if (this.props.res.length > 0) {
-      this.props.searchResults(result);
-    }
-  };
+  searchFn() {
+    debugger;
+    this.props.getSearchResultById(this.state.searchVal);
+  }
 
   getSearchVal(e) {
     let searchVal = e.target.value.toUpperCase();
@@ -37,6 +35,12 @@ class Search extends Component {
     //   }
     // }
   }
+
+  clearText(e) {
+    if (e.target.value.length === 0) {
+      this.props.getSearchResultById();
+    }
+  }
   render() {
     return (
       <div className='search'>
@@ -44,6 +48,7 @@ class Search extends Component {
           type='text'
           placeholder='Search by ID...'
           onChange={e => this.getSearchVal(e)}
+          onKeyUp={e => this.clearText(e)}
         />
         <button onClick={e => this.searchFn(this.state.searchVal)}>
           Search
