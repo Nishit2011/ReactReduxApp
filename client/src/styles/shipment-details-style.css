@@ -1,0 +1,40 @@
+.shipment-details {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.shipment-details h3 {
+  color: whitesmoke;
+}
+
+.shipment-details .tbl {
+  color: black;
+  background-color: #fff;
+  border-collapse: collapse;
+  width: 620px;
+  box-shadow: 5px 5px #ccc;
+}
+
+.shipment-details .tbl th {
+  border: 1px solid #0397d9;
+  padding: 8px;
+  width: 150px;
+}
+
+.shipment-details .tbl tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.shipment-details .tbl tr:hover {
+  background-color: #ddd;
+}
+
+.shipment-details .tbl th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04a6ee;
+  color: white;
+}

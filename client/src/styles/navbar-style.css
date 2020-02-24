@@ -1,0 +1,21 @@
+nav {
+  padding: 10px;
+}
+
+ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  justify-content: flex-end;
+}
+
+.nav-link {
+  flex: 1;
+  margin-right: 10px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: #337ab7;
+}

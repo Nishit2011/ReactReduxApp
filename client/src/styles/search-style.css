@@ -1,0 +1,17 @@
+.search {
+  margin-bottom: 15px;
+}
+
+.search input {
+  padding: 8px;
+  border: none;
+  width: 500px;
+  margin-right: 20px;
+}
+
+.search button {
+  padding: 8px;
+  width: 100px;
+  background-color: #04a6ee;
+  border: 1px solid #0397d9;
+}

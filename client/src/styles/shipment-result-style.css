@@ -1,0 +1,49 @@
+.shipment-result-tbl {
+  color: black;
+  background-color: #fff;
+  border-collapse: collapse;
+  width: 820px;
+  border: 0;
+}
+
+.shipment-result-tbl td {
+  padding: 2px;
+}
+
+.shipment-result-tbl th {
+  padding: 3px;
+}
+
+.shipment-result-tbl tr:nth-child(even) {
+  background-color: #eee;
+}
+
+.shipment-result-tbl tr:hover {
+  background-color: #ddd;
+}
+
+.shipment-result-tbl th {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  text-align: left;
+  background-color: #04a6ee;
+  color: white;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0397d9;
+  opacity: 0.8;
+  font-weight: bolder;
+  margin-top: 3px;
+  width: 100%;
+}
+
+.pagination a {
+  color: white;
+  float: left;
+  padding: 4px 16px;
+  text-decoration: none;
+}
