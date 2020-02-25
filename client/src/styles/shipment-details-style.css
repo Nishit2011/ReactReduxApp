@@ -2,19 +2,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
+  margin-top: 20px;
 }
-
-.shipment-details h3 {
-  color: whitesmoke;
+.cargoRow {
+  border-bottom: 1px solid #ccc;
 }
 
 .shipment-details .tbl {
   color: black;
-  background-color: #fff;
   border-collapse: collapse;
   width: 620px;
-  box-shadow: 5px 5px #ccc;
 }
 
 .shipment-details .tbl th {
@@ -23,11 +20,15 @@
   width: 150px;
 }
 
-.shipment-details .tbl tr:nth-child(even) {
+.shipment-details .tbl td {
+  border: 1px solid #ccc;
+}
+
+.shipment-details .tbl td:nth-child(even) {
   background-color: #f2f2f2;
 }
 
-.shipment-details .tbl tr:hover {
+.shipment-details .tbl td:hover {
   background-color: #ddd;
 }
 
@@ -35,6 +36,17 @@
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #04a6ee;
+  background-color: rgba(4, 166, 238, 0.5);
   color: white;
+}
+
+@media only screen and (max-width: 768px) {
+  .shipment-details table,
+  .shipment-details thead,
+  .shipment-details tbody,
+  .shipment-details th,
+  .shipment-details td,
+  .shipment-details tr {
+    width: 100%;
+  }
 }

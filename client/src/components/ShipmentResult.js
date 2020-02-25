@@ -13,13 +13,15 @@ class ShipmentResults extends Component {
     totalElems: 0,
     currentPage: 1,
     searchResults: [],
-    flag: true
+    flag: true,
+    shipmentName: "",
+    editableFlag: false,
+    nameArr: []
   };
   componentDidMount() {
     this.props.fetchShipments(20, this.state.page);
   }
   getSearchResultById = id => {
-    debugger;
     if (id) {
       this.setState({ flag: false }, () => this.props.fetchShipment(id));
     } else {
@@ -29,17 +31,18 @@ class ShipmentResults extends Component {
     }
   };
 
-  getPageNumber = (page, totalPage) => {
+  persist(e) {
+    localStorage.setItem("naam", e.target.value);
+    let temp = [];
+  }
+
+  getPageNumber = page => {
     console.log("page:-", this.state.totalPage);
 
     this.setState({ page }, () =>
       this.props.fetchShipments(20, this.state.page)
     );
   };
-
-  setTextField(e) {
-    console.log(e.target.value);
-  }
 
   sortTable(columnIndex) {
     let shouldSwitch;
@@ -86,10 +89,6 @@ class ShipmentResults extends Component {
     const data = this.state.flag ? this.props.res : this.props.resBasedOnId;
 
     return data.map((row, index) => {
-      const names = [];
-      names[index] = row.name;
-      localStorage.setItem("names", JSON.stringify(names));
-
       return (
         <tr key={index} className='shipment-result-tbl-row'>
           <td>{index + 1}</td>
@@ -97,10 +96,11 @@ class ShipmentResults extends Component {
           <td
             className='shipment-result-tbl-name'
             contentEditable='true'
+            id={index}
             suppressContentEditableWarning={true}
             onBlur={e => this.setTextField(e)}
           >
-            {JSON.parse(localStorage.getItem("names"))}
+            {row.name}
           </td>
           <td>{row.status}</td>
           <td>

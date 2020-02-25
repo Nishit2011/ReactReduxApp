@@ -6,29 +6,11 @@ class Pagination extends Component {
     totalPages: 1
   };
 
-  createPaginationMarkers() {
-    // const totalElems = this.props.res.length;
-    // const elemsPerPage = 20;
-    // const page = 1;
-    // let totalPages = Math.ceil(totalElems / elemsPerPage);
-    // let paginationMarkers = "";
-    // for (let i = 1; i <= totalPages; i++) {
-    //   paginationMarkers += `<a href='#' id=${i} onClick={this.triggerPagination(${i})}>${i}</a>`;
-    // }
-    // console.log(paginationMarkers);
-    // if (totalPages > 1) {
-    //   document.getElementById("paginationMarker").innerHTML = paginationMarkers;
-    // } else {
-    //   document.getElementById(
-    //     "paginationMarker"
-    //   ).innerHTML = `<a href='#'>${1}</a>`;
-    // }
-    // this.props.fetchShipments(20, 1);
+  triggerPage(e) {
+    e.preventDefault();
+    const pageNumber = document.querySelector("#currentPageId").textContent;
+    this.props.onSelectPageNumber(pageNumber);
   }
-
-  //   triggerPagination(pageNumber) {
-  //     this.props.fetchShipments(20, pageNumber);
-  //   }
 
   handlePagination = e => {
     e.preventDefault();
@@ -38,22 +20,14 @@ class Pagination extends Component {
         prevState => {
           return { currentPage: prevState.currentPage - 1 };
         },
-        () =>
-          this.props.onSelectPageNumber(
-            this.state.currentPage,
-            this.state.totalPages
-          )
+        () => this.props.onSelectPageNumber(this.state.currentPage)
       );
     } else {
       this.setState(
         prevState => {
           return { currentPage: prevState.currentPage + 1 };
         },
-        () =>
-          this.props.onSelectPageNumber(
-            this.state.currentPage,
-            this.state.totalPages
-          )
+        () => this.props.onSelectPageNumber(this.state.currentPage)
       );
     }
   };
@@ -65,8 +39,15 @@ class Pagination extends Component {
         <a href='#' id='prev' onClick={e => this.handlePagination(e)}>
           Previous
         </a>
-        {/* {this.props.res.length > 0 ? this.createPaginationMarkers() : ""} */}
-        {/* <div id='paginationMarker'></div> */}
+        <span
+          className='current-page-style'
+          contentEditable='true'
+          suppressContentEditableWarning={true}
+          onBlur={e => this.triggerPage(e)}
+          id='currentPageId'
+        >
+          {this.state.currentPage}
+        </span>
         <a href='#' id='next' onClick={e => this.handlePagination(e)}>
           Next
         </a>

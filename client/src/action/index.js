@@ -8,7 +8,6 @@ export const fetchShipments = (limit, page) => async dispatch => {
     `/shipments?_limit=${limit}&_page=${page}`
   );
 
-  //console.log(response);
   dispatch({
     type: FETCH_SHIPMENTS,
     payload: response.data

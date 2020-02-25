@@ -11,7 +11,7 @@ class ShipmentDetails extends Component {
 
   renderCargo(el, index) {
     return (
-      <div key={index}>
+      <div key={index} className='cargoRow'>
         <div>Type: {el.type}</div>
         <div>Description: {el.description}</div>
         <div>Volume: {el.volume}</div>

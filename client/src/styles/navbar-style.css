@@ -1,21 +1,28 @@
+@import url("https://fonts.googleapis.com/css?family=Hind+Siliguri&display=swap");
 nav {
-  padding: 10px;
+  display: flex;
+  justify-content: space-between;
 }
 
 ul {
   display: flex;
   list-style: none;
-  margin: 0;
-  justify-content: flex-end;
 }
 
 .nav-link {
-  flex: 1;
-  margin-right: 10px;
   color: #fff;
   text-decoration: none;
+  margin-right: 10px;
+}
+ul li {
+  text-align: right;
 }
 
 .nav-link:hover {
   color: #337ab7;
+}
+
+.navbar-brand img {
+  cursor: pointer;
+  transform: scale(0.5);
 }

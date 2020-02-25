@@ -1,13 +1,37 @@
 .shipment-result-tbl {
   color: black;
-  background-color: #fff;
   border-collapse: collapse;
   width: 820px;
-  border: 0;
+  border: none;
+}
+.shipment-result-tbl-body {
+  background-color: white;
+}
+
+.error {
+  visibility: hidden;
+  color: red;
+  font-weight: bolder;
+  font-size: 14px;
+  text-align: center;
 }
 
 .shipment-result-tbl td {
-  padding: 2px;
+  padding: 3px;
+}
+.shipment-result-tbl-row td {
+  padding-right: 20px;
+  padding-bottom: 4px;
+}
+.shipment-result-tbl-row td:nth-of-type(1) {
+  padding-left: 10px;
+}
+.shipment-result-tbl-row td:nth-of-type(5) {
+  padding-right: 20px;
+}
+.shipment-result-tbl thead tr th {
+  padding-left: 5px;
+  cursor: pointer;
 }
 
 .shipment-result-tbl th {
@@ -22,23 +46,30 @@
   background-color: #ddd;
 }
 
-.shipment-result-tbl th {
+.shipment-result-tbl thead tr th {
   padding-top: 4px;
   padding-bottom: 4px;
   text-align: left;
-  background-color: #04a6ee;
-  color: white;
+  background-color: rgba(4, 166, 238, 0.5);
+  color: #fff;
 }
 
 .pagination {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #0397d9;
-  opacity: 0.8;
+  background-color: rgba(4, 166, 238, 0.5);
+
   font-weight: bolder;
   margin-top: 3px;
   width: 100%;
+}
+.current-page-style {
+  background-color: #fff;
+  padding: 5px;
+  font-size: 14px;
+  font-weight: 900;
+  z-index: 1;
 }
 
 .pagination a {
@@ -46,4 +77,63 @@
   float: left;
   padding: 4px 16px;
   text-decoration: none;
+}
+@media only screen and (max-width: 768px) {
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+  }
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  tr {
+    border: 1px solid #ccc;
+  }
+  td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 200px;
+    margin-left: 150px;
+  }
+  td:before {
+    position: absolute;
+    top: 1px;
+    left: 6px;
+    width: 100px;
+    padding-right: 40px;
+    white-space: nowrap;
+    margin-left: -150px;
+  }
+  .shipment-result-tbl td:nth-of-type(1):before {
+    content: "#";
+    background-color: #04a6ee;
+    color: white;
+  }
+  .shipment-result-tbl td:nth-of-type(2):before {
+    content: "Id";
+    background-color: #04a6ee;
+    color: white;
+  }
+  .shipment-result-tbl td:nth-of-type(3):before {
+    content: "Name";
+    background-color: #04a6ee;
+    color: white;
+  }
+  .shipment-result-tbl td:nth-of-type(4):before {
+    content: "Status";
+    background-color: #04a6ee;
+    color: white;
+  }
+  .shipment-result-tbl td:nth-of-type(5):before {
+    content: "Details";
+    background-color: #04a6ee;
+    color: white;
+  }
 }
