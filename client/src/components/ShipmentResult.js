@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import "../styles/shipment-result-style.css";
-import { fetchShipments, fetchShipment } from "../action/index";
+import { fetchShipments, fetchShipment, updateName } from "../action/index";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Pagination from "./Pagination";
 import Search from "./Search";
+import sortIcon from "../assets/sort_icon.png";
 
 class ShipmentResults extends Component {
   state = {
@@ -16,11 +17,13 @@ class ShipmentResults extends Component {
     flag: true,
     shipmentName: "",
     editableFlag: false,
-    nameArr: []
+    nameArr: [],
+    inputRefs: []
   };
   componentDidMount() {
     this.props.fetchShipments(20, this.state.page);
   }
+
   getSearchResultById = id => {
     if (id) {
       this.setState({ flag: false }, () => this.props.fetchShipment(id));
@@ -43,6 +46,14 @@ class ShipmentResults extends Component {
       this.props.fetchShipments(20, this.state.page)
     );
   };
+
+  setTextField(id) {
+    console.log(id);
+
+    //debugger;
+    const shipmentName = document.querySelector(`#${id}`).textContent;
+    this.props.updateName(id, shipmentName);
+  }
 
   sortTable(columnIndex) {
     let shouldSwitch;
@@ -91,20 +102,20 @@ class ShipmentResults extends Component {
     return data.map((row, index) => {
       return (
         <tr key={index} className='shipment-result-tbl-row'>
-          <td>{index + 1}</td>
+          <td>&nbsp;{index + 1}</td>
           <td className='shipment-result-tbl-id'>{row.id}</td>
           <td
             className='shipment-result-tbl-name'
             contentEditable='true'
-            id={index}
+            id={row.id}
             suppressContentEditableWarning={true}
-            onBlur={e => this.setTextField(e)}
+            onBlur={e => this.setTextField(e.target.id)}
           >
             {row.name}
           </td>
           <td>{row.status}</td>
           <td>
-            <Link to={`/details/${row.id}`} id={row.id}>
+            <Link className='click-here' to={`/details/${row.id}`} id={row.id}>
               Click Here
             </Link>
           </td>
@@ -120,10 +131,19 @@ class ShipmentResults extends Component {
           <thead>
             <tr>
               <th>#</th>
-              <th onClick={() => this.sortTable(1)}>Id</th>
-              <th onClick={() => this.sortTable(2)}>Name</th>
-              <th onClick={() => this.sortTable(3)}>Status</th>
-              <th>Details</th>
+              <th onClick={() => this.sortTable(1)}>
+                Id
+                <img className='sort-icon' src={sortIcon} />
+              </th>
+              <th onClick={() => this.sortTable(2)}>
+                Shipment Name <img className='sort-icon' src={sortIcon} />
+              </th>
+              <th onClick={() => this.sortTable(3)}>
+                Status <img className='sort-icon' src={sortIcon} />
+              </th>
+              <th>
+                Details <img className='sort-icon' src={sortIcon} />
+              </th>
             </tr>
           </thead>
           <tbody className='shipment-result-tbl-body'>
@@ -150,6 +170,8 @@ const mapStateToProps = (state, props) => {
     resBasedOnId: state.fetchShipmentReducer
   };
 };
-export default connect(mapStateToProps, { fetchShipments, fetchShipment })(
-  ShipmentResults
-);
+export default connect(mapStateToProps, {
+  fetchShipments,
+  fetchShipment,
+  updateName
+})(ShipmentResults);

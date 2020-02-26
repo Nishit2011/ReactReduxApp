@@ -43,14 +43,20 @@
   transform: translateY(4px);
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 760px),
+  (min-device-width: 768px) and (max-device-width: 1024px) {
   .search input {
     padding: 8px;
     border: none;
     width: 100%;
-    margin-right: 20px;
+    margin-right: 200px;
+    margin-bottom: 10px;
   }
   .search button {
     width: 100%;
+    background-color: rgba(4, 166, 238, 0.7);
+  }
+  ::placeholder {
+    padding-left: 200px;
   }
 }

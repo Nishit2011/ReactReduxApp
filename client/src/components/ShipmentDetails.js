@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../styles/shipment-details-style.css";
-import { fetchShipment } from "../action/index";
+import { fetchShipment, updateName } from "../action/index";
 import { connect } from "react-redux";
 
 class ShipmentDetails extends Component {
@@ -29,6 +29,14 @@ class ShipmentDetails extends Component {
     );
   }
 
+  setTextField(id) {
+    console.log(id);
+
+    //debugger;
+    const shipmentName = document.querySelector(`#${id}`).textContent;
+    this.props.updateName(id, shipmentName);
+  }
+
   renderShipmentDetailsTbl() {
     const {
       id,
@@ -52,8 +60,15 @@ class ShipmentDetails extends Component {
             <td>{id}</td>
           </tr>
           <tr>
-            <th>Name</th>
-            <td>{name}</td>
+            <th>Shipment Name</th>
+            <td
+              contentEditable='true'
+              id={id}
+              suppressContentEditableWarning={true}
+              onBlur={e => this.setTextField(e.target.id)}
+            >
+              {name}
+            </td>
           </tr>
           <tr>
             <th>Cargo</th>
@@ -106,7 +121,7 @@ class ShipmentDetails extends Component {
   render() {
     return (
       <div className='shipment-details'>
-        <h3>Shipment Details</h3>
+        <React.Fragment>Shipment Details</React.Fragment>
         {this.props.res ? (
           this.renderShipmentDetailsTbl()
         ) : (
@@ -121,4 +136,6 @@ const mapStateToProps = (state, props) => {
   return { res: state.fetchShipmentReducer[0] };
 };
 
-export default connect(mapStateToProps, { fetchShipment })(ShipmentDetails);
+export default connect(mapStateToProps, { fetchShipment, updateName })(
+  ShipmentDetails
+);

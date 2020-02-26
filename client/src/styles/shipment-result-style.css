@@ -1,10 +1,11 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
 .shipment-result-tbl {
   color: black;
   border-collapse: collapse;
   width: 820px;
   border: none;
 }
-.shipment-result-tbl-body {
+.shipment-result-tbl-row {
   background-color: white;
 }
 
@@ -16,6 +17,12 @@
   text-align: center;
 }
 
+.sort-icon {
+  transform: scale(0.6);
+  top: 7px;
+  position: relative;
+}
+
 .shipment-result-tbl td {
   padding: 3px;
 }
@@ -23,15 +30,21 @@
   padding-right: 20px;
   padding-bottom: 4px;
 }
-.shipment-result-tbl-row td:nth-of-type(1) {
-  padding-left: 10px;
-}
-.shipment-result-tbl-row td:nth-of-type(5) {
-  padding-right: 20px;
-}
+
 .shipment-result-tbl thead tr th {
   padding-left: 5px;
+  box-shadow: 0 2px rgb(212, 212, 212);
   cursor: pointer;
+  outline: 0;
+}
+.shipment-result-tbl thead tr th:hover {
+  color: #337ab7;
+  box-shadow: 0 2px rgb(212, 212, 212);
+  transform: translateY(1px);
+}
+.shipment-result-tbl thead tr th:active {
+  box-shadow: 0 2px #999;
+  transform: translateY(4px);
 }
 
 .shipment-result-tbl th {
@@ -52,6 +65,20 @@
   text-align: left;
   background-color: rgba(4, 166, 238, 0.5);
   color: #fff;
+}
+
+.click-here {
+  text-decoration: none;
+}
+
+.click-here:hover {
+  color: #337ab7;
+  cursor: pointer;
+}
+
+.click-here:active {
+  box-shadow: none;
+  top: 5px;
 }
 
 .pagination {
@@ -78,31 +105,32 @@
   padding: 4px 16px;
   text-decoration: none;
 }
-@media only screen and (max-width: 768px) {
-  table,
-  thead,
-  tbody,
-  th,
-  td,
-  tr {
+@media only screen and (max-width: 760px),
+  (min-device-width: 768px) and (max-device-width: 1024px) {
+  .shipment-result-tbl,
+  .shipment-result-tbl thead,
+  .shipment-result-tbl tbody,
+  .shipment-result-tbl th,
+  .shipment-result-tbl td,
+  .shipment-result-tbl tr {
     display: block;
   }
-  thead tr {
+  .shipment-result-tbl thead tr {
     position: absolute;
     top: -9999px;
     left: -9999px;
   }
-  tr {
+  .shipment-result-tbl tr {
     border: 1px solid #ccc;
   }
-  td {
+  .shipment-result-tbl td {
     border: none;
     border-bottom: 1px solid #eee;
     position: relative;
-    padding-left: 200px;
-    margin-left: 150px;
+    padding-left: 100px;
+    margin-left: 350px;
   }
-  td:before {
+  .shipment-result-tbl td:before {
     position: absolute;
     top: 1px;
     left: 6px;
@@ -113,27 +141,18 @@
   }
   .shipment-result-tbl td:nth-of-type(1):before {
     content: "#";
-    background-color: #04a6ee;
-    color: white;
+    color: #337ab7;
   }
   .shipment-result-tbl td:nth-of-type(2):before {
     content: "Id";
-    background-color: #04a6ee;
-    color: white;
   }
   .shipment-result-tbl td:nth-of-type(3):before {
-    content: "Name";
-    background-color: #04a6ee;
-    color: white;
+    content: "Shipment Name";
   }
   .shipment-result-tbl td:nth-of-type(4):before {
     content: "Status";
-    background-color: #04a6ee;
-    color: white;
   }
   .shipment-result-tbl td:nth-of-type(5):before {
     content: "Details";
-    background-color: #04a6ee;
-    color: white;
   }
 }
