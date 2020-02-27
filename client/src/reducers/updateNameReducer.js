@@ -1,5 +1,4 @@
 import { UPDATE_NAME } from "../action/types";
-import _ from "lodash";
 
 export default (state = [], action) => {
   //   console.log(action.payload);

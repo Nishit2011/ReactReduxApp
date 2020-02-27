@@ -10,7 +10,7 @@ const Navbar = props => {
         <div>
           <Link className='navbar-brand' href='#' to='/'>
             <img
-              class='img-responsive lazyloaded'
+              className='img-responsive lazyloaded'
               src={logo}
               alt='FreightHub'
             ></img>

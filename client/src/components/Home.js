@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import ShipmentResult from "./ShipmentResult";
-import Search from "./Search";
 import "../styles/home-style.css";
 
 class Home extends Component {

@@ -9,14 +9,6 @@
   background-color: white;
 }
 
-.error {
-  visibility: hidden;
-  color: red;
-  font-weight: bolder;
-  font-size: 14px;
-  text-align: center;
-}
-
 .sort-icon {
   transform: scale(0.6);
   top: 7px;

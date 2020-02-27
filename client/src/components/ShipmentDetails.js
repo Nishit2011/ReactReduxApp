@@ -120,13 +120,14 @@ class ShipmentDetails extends Component {
   }
   render() {
     return (
-      <div className='shipment-details'>
-        <React.Fragment>Shipment Details</React.Fragment>
-        {this.props.res ? (
-          this.renderShipmentDetailsTbl()
-        ) : (
-          <div>Loading...</div>
-        )}
+      <div>
+        <div className='shipment-details'>
+          {this.props.res ? (
+            this.renderShipmentDetailsTbl()
+          ) : (
+            <div>Loading...</div>
+          )}
+        </div>
       </div>
     );
   }

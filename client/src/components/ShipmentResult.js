@@ -18,7 +18,8 @@ class ShipmentResults extends Component {
     shipmentName: "",
     editableFlag: false,
     nameArr: [],
-    inputRefs: []
+    inputRefs: [],
+    sort: "asc"
   };
   componentDidMount() {
     this.props.fetchShipments(20, this.state.page);
@@ -33,11 +34,6 @@ class ShipmentResults extends Component {
       );
     }
   };
-
-  persist(e) {
-    localStorage.setItem("naam", e.target.value);
-    let temp = [];
-  }
 
   getPageNumber = page => {
     console.log("page:-", this.state.totalPage);
@@ -55,42 +51,14 @@ class ShipmentResults extends Component {
     this.props.updateName(id, shipmentName);
   }
 
-  sortTable(columnIndex) {
-    let shouldSwitch;
-    let i;
-    let switchcount = 0;
-    let table = document.getElementById("resultTbl");
-    let toggleSort = true;
-    let defaultSearchOption = "asc";
-    while (toggleSort) {
-      toggleSort = false;
-      let rows = table.rows;
-      for (i = 1; i < rows.length - 1; i++) {
-        shouldSwitch = false;
-        let x = rows[i].getElementsByTagName("td")[columnIndex];
-        let y = rows[i + 1].getElementsByTagName("td")[columnIndex];
-        if (defaultSearchOption == "asc") {
-          if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-            shouldSwitch = true;
-            break;
-          }
-        } else if (defaultSearchOption == "desc") {
-          if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-            shouldSwitch = true;
-            break;
-          }
-        }
-      }
-      if (shouldSwitch) {
-        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-        toggleSort = true;
-        switchcount++;
-      } else {
-        if (switchcount == 0 && defaultSearchOption == "asc") {
-          defaultSearchOption = "desc";
-          toggleSort = true;
-        }
-      }
+  sortTable(event, sortKey) {
+    const data = this.props.res;
+    if (this.state.sort === "asc") {
+      data.sort((a, b) => b[sortKey].localeCompare(a[sortKey]));
+      this.setState({ data, sort: "desc" });
+    } else if (this.state.sort === "desc") {
+      data.sort((a, b) => a[sortKey].localeCompare(b[sortKey]));
+      this.setState({ data, sort: "asc" });
     }
   }
 
@@ -131,18 +99,20 @@ class ShipmentResults extends Component {
           <thead>
             <tr>
               <th>#</th>
-              <th onClick={() => this.sortTable(1)}>
+              <th onClick={e => this.sortTable(e, "id")}>
                 Id
-                <img className='sort-icon' src={sortIcon} />
+                <img className='sort-icon' alt='ID' src={sortIcon} />
               </th>
-              <th onClick={() => this.sortTable(2)}>
-                Shipment Name <img className='sort-icon' src={sortIcon} />
+              <th onClick={e => this.sortTable(e, "name")}>
+                Shipment Name{" "}
+                <img className='sort-icon' alt='NAME' src={sortIcon} />
               </th>
-              <th onClick={() => this.sortTable(3)}>
-                Status <img className='sort-icon' src={sortIcon} />
+              <th onClick={e => this.sortTable(e, "status")}>
+                Status <img className='sort-icon' alt='STATUS' src={sortIcon} />
               </th>
               <th>
-                Details <img className='sort-icon' src={sortIcon} />
+                Details{" "}
+                <img className='sort-icon' alt='SORTICON' src={sortIcon} />
               </th>
             </tr>
           </thead>

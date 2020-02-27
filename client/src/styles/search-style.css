@@ -34,6 +34,19 @@
   outline: 0;
 }
 
+.error {
+  color: red;
+  font-weight: bolder;
+  font-size: 14px;
+  text-align: center;
+}
+.errorInput {
+  border: 2px solid red;
+}
+.validInput {
+  border: 2px solid green;
+}
+
 .search button:hover {
   background-color: rgba(4, 166, 238, 0.2);
 }

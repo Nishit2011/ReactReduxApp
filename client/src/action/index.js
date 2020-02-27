@@ -1,6 +1,4 @@
 import { UPDATE_NAME, FETCH_SHIPMENT, FETCH_SHIPMENTS } from "./types";
-import axios from "axios";
-import history from "../history/history";
 import baseURL from "./api/api";
 
 export const fetchShipments = (limit, page) => async dispatch => {
